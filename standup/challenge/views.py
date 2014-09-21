@@ -8,7 +8,7 @@ def index(request):
         #data = 1
         #c = Context({'data':data})
     #return HttpResponse(template._render(c))
-    return HttpResponse("Hello World")
+    return HttpResponse("Hello Worlds")
     #sys.exit()
     #return render_to_response('test.html')
 
