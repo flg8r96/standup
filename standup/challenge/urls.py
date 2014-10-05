@@ -5,8 +5,6 @@ from challenge import views
 
 print "in challenge urls.py"
 urlpatterns = patterns('',
-#    url(r'^test/$', views.test, name='test'),
-#    url(r'^index/$', views.index, name='index'),
     url(r'^$', views.index, name='index'),
 #    url(r'^$', views.test, natest'),
 )
