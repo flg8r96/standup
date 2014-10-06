@@ -1,5 +1,26 @@
+# blah
 from django.shortcuts import render
+from django.shortcuts import redirect
+
+import traceback
+from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
+from django.shortcuts import render_to_response
+from django.template import Context, loader
+import MySQLdb
+import sys
+
+from challenge import models
+from challenge.models import user
+#from challenge.models import motion_history
+#from challenge.models import deskheight_history
+#from challenge.models import datamart
+#from challenge.models import daily_winner
+
+import json
+from urlparse import parse_qsl
+import datetime
+#import main
 
 def index(request):
     if request.method == 'GET':
