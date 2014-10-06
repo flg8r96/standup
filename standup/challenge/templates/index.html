@@ -4,7 +4,7 @@
     {% load staticfiles %}
 	<title>Put your title here</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<link href="/Users/matt/PycharmProjects/standupapp/style.css" type="text/css" rel="stylesheet" />
+	<link type="text/css" rel="stylesheet" href="{% static 'style.css' %}" />
 </head>
 <body>
 	<div class="content">
@@ -13,18 +13,27 @@
 			<li>
 				<div class="status_icon_CT">
 					<ul>Courtney</ul>
-					<ul><img src=/Users/matt/PycharmProjects/standupapp/WaitingRoomIcon.png></ul>
+                    {% if cs %}
+                        <ul><img src="{% static 'assets/WaitingRoomIcon.png' %}" ></ul>
+                    {% else %}
+                        <ul><img src="{% static 'assets/standin.png' %}"></ul>
+                    {% endif %}
+
 				</div>
 			</li>
 			<li>
 				<div class="challenge_logo">
-					<img src=/Users/matt/PycharmProjects/standupapp/standupchallengelogoONB.png>
+					<img src="{% static 'assets/standupchallengelogoONB.png' %}">
 				</div>
 			</li>
 			<li>
 				<div class="status_icon_MP">
 					<ul>Matt</ul>
-					<ul><img src=/Users/matt/PycharmProjects/standupapp/standin.png></ul>
+					{% if ms %}
+                        <ul><img src="{% static 'assets/WaitingRoomIcon.png' %}" ></ul>
+                    {% else %}
+                        <ul><img src="{% static 'assets/standin.png' %}"></ul>
+                    {% endif %}
 				</div>
 			</li>
 			

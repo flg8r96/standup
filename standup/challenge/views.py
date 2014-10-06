@@ -33,6 +33,7 @@ def index(request):
         mattsit = User.objects.filter(name='Matt').values('sit_status')
         ms = mattsit[0]
         print ms
+        mss = ms['sit_status']
         if ms['sit_status']:
             mattsitstr = 'sitting'
         else:
@@ -41,7 +42,7 @@ def index(request):
         courtneysit = User.objects.filter(name='Courtney').values('sit_status')
         cs = courtneysit[0]
         print cs
-
+        css = cs['sit_status']
         if cs['sit_status']:
             courtneysitstr = 'sitting'
         else:
@@ -62,7 +63,7 @@ def index(request):
         #print "Views.py: sitting: " + str(sitting)
         #return HttpResponse(template._render(c))
         #return HttpResponse(string)
-        c = Context({'string': string, 'cs': cs, 'ms': ms})
+        c = Context({'string': string, 'cs': css, 'ms': mss})
         return HttpResponse(template.render(c))
 
     #sys.exit()
