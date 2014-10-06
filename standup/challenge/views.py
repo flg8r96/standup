@@ -87,6 +87,11 @@ def index(request):
         # time (current time in datetime format)
         # data (if sensor = stand then data = distance, else data = T/F for the inmotion state)
         dict_parse = dict(parsed)
+
+        # init these vars
+        #dtime = datetime.datetime.now()
+        #user_id = 0
+
         try:
             typeofsensor = dict_parse["typeofsensor"]
             sensorname = dict_parse["sensorname"]
@@ -110,10 +115,10 @@ def index(request):
             # save the event in the history tables
             if typeofsensor == "stand":
                 save = DeskheightHistory(user_id=user_id,
-                      height=data)
+                      height=data, date=dtime)
             elif typeofsensor == "motion":
                 save = MotionHistory(user_id=user_id,
-                      inmotion_status=data)
+                      inmotion_status=data, date=dtime)
             print "Trying to write to db .."
             sr = save.save()
             print "Data persisted ..."
@@ -122,13 +127,13 @@ def index(request):
             # save the status of the current user
             if sensorname == "Matt" and typeofsensor == "stand" and data > 15:      # CHANGE THIS TO READ DB
                 # Matt is standing
-                uid = User.objects.get(id == 1)
+                uid = User.objects.get(name="Matt")
                 uid.sit_status = True
                 uid.save(update_fields=['sit_status'])
                 #save = User(name=sensorname, sit_status=True)
             elif sensorname == "Matt" and typeofsensor == "stand" and data < 15:    # CHANGE THIS TO READ DB
                 # Matt is sitting
-                uid = User.objects.get(id == 1)
+                uid = User.objects.get(name="Matt")
                 uid.sit_status = False
                 uid.save(update_fields=['sit_status'])
                 #save = User(name=sensorname, sit_status=False)
