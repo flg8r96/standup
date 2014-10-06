@@ -23,7 +23,15 @@ SECRET_KEY = '(zrp183k&0c123$fae=^%7z6*p-fspo9@=ge6@n)co!)vg(w1c'
 DEBUG = True
 
 TEMPLATE_DEBUG = True
+PROJECT_PATH = os.path.realpath(os.path.dirname(__file__))
+#TEMPLATE_DIRS = (
+#    os.path.join(PROJECT_PATH, 'templates'),
+#)
 
+# MP added 12/1 for servingfiles for static views
+# COMMENT AND UNCOMMENT THE FOLLOW TWO LINES TO RUN IN PRODUCTION
+STATIC_URL = '/Users/flg8r96/development/standup/challenge/static/'
+#STATIC_URL = '/usr/lib/python2.6/site-packages/django/contrib/admin/static/admin/'
 ALLOWED_HOSTS = []
 
 

@@ -24,6 +24,7 @@ import datetime
 
 def index(request):
     if request.method == 'GET':
+        template = loader.get_template('index.html')
         print "\nThis is a " + request.method
         #template = loader.get_template('aodl/athome3.html')
         #data = 1
@@ -59,8 +60,11 @@ def index(request):
         #else:
         #    sitting = False
         #print "Views.py: sitting: " + str(sitting)
-    #return HttpResponse(template._render(c))
-    return HttpResponse(string)
+        #return HttpResponse(template._render(c))
+        #return HttpResponse(string)
+        c = Context({'string': string, 'cs': cs, 'ms': ms})
+        return HttpResponse(template.render(c))
+
     #sys.exit()
     #return render_to_response('test.html')
 
