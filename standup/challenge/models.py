@@ -106,7 +106,7 @@ class DeskheightHistory(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
     user = models.ForeignKey('User', blank=True, null=True)
     height = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False
@@ -164,7 +164,7 @@ class MotionHistory(models.Model):
     id = models.IntegerField(primary_key=True)  # AutoField?
     user = models.ForeignKey('User', blank=True, null=True)
     inmotion_status = models.IntegerField(blank=True, null=True)
-    date = models.DateField(blank=True, null=True)
+    date = models.DateTimeField(blank=True, null=True)
 
     class Meta:
         managed = False

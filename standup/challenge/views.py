@@ -116,9 +116,11 @@ def index(request):
             if typeofsensor == "stand":
                 save = DeskheightHistory(user_id=user_id,
                       height=data, date=dtime)
+                print "in stand"
             elif typeofsensor == "motion":
                 save = MotionHistory(user_id=user_id,
                       inmotion_status=data, date=dtime)
+                print "in motion"
             print "Trying to write to db .."
             sr = save.save()
             print "Data persisted ..."
@@ -139,12 +141,26 @@ def index(request):
                 #save = User(name=sensorname, sit_status=False)
             elif sensorname == "Courtney" and typeofsensor == "stand" and data == True:
                 # Courtney is standing
-                save = User(name=sensorname, sit_status=True)
+                uid = User.objects.get(name="Courtney")
+                uid.sit_status = True
+                uid.save(update_fields=['sit_status'])
             elif sensorname == "Courtney" and typeofsensor == "stand" and data == False:
                 # Courtney is sitting
-                save = User(name=sensorname, sit_status=False)
+                uid = User.objects.get(name="Courtney")
+                uid.sit_status = False
+                uid.save(update_fields=['sit_status'])
+            elif typeofsensor == "motion":
+                # update users presence status by checking the last record of the motionhistory
+                st = MotionHistory.objects.get(name=sensorname).filter('date').order(-)     # NEED TO GET THE MOST RECENT TIMESTAMP
+                uid = User.objects.get(name=sensorname)
+                uid.presence_status = st.inmotion_status    # set presence status to the last inmotion record value
+                uid.save(update_fields=['presence_status'])
+
+
+
+
             print "Trying to write to db .."
-            sr = save.save()
+            #sr = uid.save()
             print "Data persisted ..."
             print "Save result: " +str(sr)
 
